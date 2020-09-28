@@ -6,8 +6,8 @@ using System.Reflection;
 
 public class CodeWindow : EditorWindow
 {
-    private string[] assemblies;
-    private int index = 0;
+    private string[] _assemblies;
+    private int _assembleyIndex = 0;
 
     // Add menu named "Custom Window" to the Window menu
     [MenuItem("Window/Organisation/Code Overview", false, 3000)]
@@ -27,8 +27,8 @@ public class CodeWindow : EditorWindow
         titleContent.text = "Code Overview";
 
         //Update the list of assemblies, and create the dropdown menu
-        assemblies = CompilationPipeline.GetAssemblies().Select(x => x.name).ToArray();
-        index = EditorGUILayout.Popup(index, assemblies, EditorStyles.toolbarDropDown);
+        _assemblies = CompilationPipeline.GetAssemblies().Select(x => x.name).ToArray();
+        _assembleyIndex = EditorGUILayout.Popup(_assembleyIndex, _assemblies, EditorStyles.toolbarDropDown);
 
         if (GUILayout.Button("Generate overview", EditorStyles.toolbarButton))
         {
@@ -38,11 +38,11 @@ public class CodeWindow : EditorWindow
         EditorGUILayout.EndHorizontal();
     }
 
-    //Generate the Project(code) overview
+    //Generate the Project(code) overview   (Move to seperate class later)
     private void GenerateOverview()
     {
         //Load the assembly thats been selected in the dropdown    
-        System.Reflection.Assembly assembly = System.Reflection.Assembly.Load(assemblies[index]);
+        System.Reflection.Assembly assembly = System.Reflection.Assembly.Load(_assemblies[_assembleyIndex]);
 
         //Get the classes we are interested in
         foreach (var type in assembly.GetTypes())

@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.ronaldk.codeguide": {
+    "com.ronald.codeguide": {
       "version": "file:CodeGuide",
       "depth": 0,
       "source": "embedded",
